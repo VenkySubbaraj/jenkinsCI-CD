@@ -24,6 +24,7 @@ pipeline {
                         echo ${PASSWORD} | docker login --username ${USERNAME} --password-stdin
                         '''
                         sh "docker build -t ${imageName}:${imageVersion} ."
+                        sleep 600
                         sh 'docker push ${imageName}:${imageVersion}'
                         
                     }
