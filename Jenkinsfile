@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Set the Docker image name and version
-                    def imageName = 'sample-node-app'
+                    def imageName = 'venkysubbaraj/sample-node-app'
                     def imageVersion = '1.0.0'
 
                     withCredentials([usernamePassword(credentialsId: 'dockercredentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
