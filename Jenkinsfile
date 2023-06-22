@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     // Set the Docker image name and version
-                    def imageName = 'venkysubbaraj/sample-node'
+                    def imageName = 'venkysubbaraj/sample'
                     def imageVersion = '1.0.0'
 
                     sh "docker push ${imageName}:${imageVersion}"
