@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     // removes all docker images
-                    sh 'docker iamge prune -a' 
+                    sh 'docker image prune -a' 
                 }
             }
         }
