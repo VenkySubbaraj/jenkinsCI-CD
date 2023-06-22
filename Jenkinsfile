@@ -10,7 +10,7 @@ pipeline {
                     def imageVersion = '1.0.0'
                     
                     // Build the Docker image
-                    sh "sudo docker build -t ${imageName}:${imageVersion} ."
+                    sh "sudo -S docker build -t ${imageName}:${imageVersion} ."
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
                     // Login to Docker Hub
                     withDockerRegistry([credentialsId: ${dockercredentials}, url: '']) {
                         // Push the Docker image
-                        sh "sudo docker push ${imageName}:${imageVersion}"
+                        sh "sudo -S docker push ${imageName}:${imageVersion}"
                     }
                 }
             }
