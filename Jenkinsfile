@@ -23,7 +23,6 @@ pipeline {
                     def imageVersion = '1.0.0'
 
                     sh "docker push ${imageName}:${imageVersion}"
-                    
                     // Login to Docker Hub
                     // withDockerRegistry([credentialsId: 'dockercredentials', url: '']) {
                         // Push the Docker image
