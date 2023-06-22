@@ -26,12 +26,9 @@ pipeline {
                         sh '''
                         echo ${PASSWORD} | docker login --username ${USERNAME} --password-stdin
                         '''
-                        sh "docker push ${imageName}:${imageVersion}"
-                    // Login to Docker Hub
-                    // withDockerRegistry([credentialsId: 'dockercredentials', url: '']) {
-                        // Push the Docker image
+                        sh 'docker push ${imageName}:${imageVersion}'
                         
-                    // }
+                    }
                 }
             }
         }
