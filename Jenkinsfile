@@ -8,7 +8,6 @@ pipeline {
                     // Set the Docker image name and version
                     def imageName = 'venkysubbaraj/sample'
                     def imageVersion = '1.0.0'
-                    
                     // Build the Docker image
                     sh "docker build -t ${imageName}:${imageVersion} ."
                 }
