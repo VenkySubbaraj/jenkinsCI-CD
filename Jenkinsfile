@@ -2,6 +2,16 @@ pipeline {
     agent any
     
     stages {
+        stage('Clean-docker-image') {
+            steps {
+                script {
+                    // removes all docker images
+                    sh 'docker image prune -a --force'
+                    sh 'docker image ls'
+                }
+            }
+        }
+        
         stage('Build') {
             steps {
                 script {
@@ -14,18 +24,7 @@ pipeline {
                 }
             }
         }
-
-        stage('Clean-docker-image') {
-            steps {
-                script {
-                    // removes all docker images
-                    sh 'docker image prune -a --force'
-                    sh 'docker image ls'
-                }
-            }
-        }
-
-      
+        
         stage('Push') {
             steps {
                 script {
@@ -35,7 +34,7 @@ pipeline {
 
                     withCredentials([usernamePassword(credentialsId: 'dockercredentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                         sh '''
-                        docker login --username ${USERNAME} --password-stdin
+                        echo ${PASSWORD} | docker login --username ${USERNAME} --password-stdin
                         '''
                         sh 'docker push ${imageName}:${imageVersion}'
                         
