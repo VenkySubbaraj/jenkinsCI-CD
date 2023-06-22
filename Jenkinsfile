@@ -22,7 +22,11 @@ pipeline {
                     def imageName = 'venkysubbaraj/sample'
                     def imageVersion = '1.0.0'
 
-                    sh "docker push ${imageName}:${imageVersion}"
+                    withCredentials([usernamePassword(credentialsId: 'dockercredentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                        sh '''
+                        echo ${PASSWORD} | docker login --username ${USERNAME} --password-stdin
+                        '''
+                        sh "docker push ${imageName}:${imageVersion}"
                     // Login to Docker Hub
                     // withDockerRegistry([credentialsId: 'dockercredentials', url: '']) {
                         // Push the Docker image
