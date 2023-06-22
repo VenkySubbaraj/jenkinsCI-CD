@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Set the Docker image name and version
-                    def imageName = 'venkysubbaraj/sample'
+                    def imageName = 'sample-node-app'
                     def imageVersion = '1.0.0'
                     
                     // Build the Docker image
@@ -14,12 +14,22 @@ pipeline {
                 }
             }
         }
-        
+
+        stage('Clean-docker-image') {
+            steps {
+                script {
+                    // removes all docker images
+                    sh 'docker iamge prune -a' 
+                }
+            }
+        }
+
+      
         stage('Push') {
             steps {
                 script {
                     // Set the Docker image name and version
-                    def imageName = 'venkysubbaraj/sample'
+                    def imageName = 'sample-node-app'
                     def imageVersion = '1.0.0'
 
                     withCredentials([usernamePassword(credentialsId: 'dockercredentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
