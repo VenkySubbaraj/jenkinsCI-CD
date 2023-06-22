@@ -12,20 +12,7 @@ pipeline {
             }
         }
         
-        stage('Build') {
-            steps {
-                script {
-                    // Set the Docker image name and version
-                    def imageName = 'sample-node-app'
-                    def imageVersion = '1.0.0'
-                    
-                    // Build the Docker image
-                    sh "docker build -t ${imageName}:${imageVersion} ."
-                }
-            }
-        }
-        
-        stage('Push') {
+        stage('Build and Push') {
             steps {
                 script {
                     // Set the Docker image name and version
@@ -36,6 +23,7 @@ pipeline {
                         sh '''
                         echo ${PASSWORD} | docker login --username ${USERNAME} --password-stdin
                         '''
+                        sh "docker build -t ${imageName}:${imageVersion} ."
                         sh 'docker push ${imageName}:${imageVersion}'
                         
                     }
