@@ -19,7 +19,8 @@ pipeline {
             steps {
                 script {
                     // removes all docker images
-                    sh 'docker image prune -a' 
+                    sh 'docker image prune -a -y'
+                    sh 'docker image ls'
                 }
             }
         }
