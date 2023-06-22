@@ -18,11 +18,11 @@ pipeline {
             steps {
                 script {
                     // Set the Docker image name and version
-                    def imageName = 'your-dockerhub-username/sample-node'
+                    def imageName = 'venkysubbaraj/sample-node'
                     def imageVersion = '1.0.0'
                     
                     // Login to Docker Hub
-                    withDockerRegistry([credentialsId: dockercredentials, url: '']) {
+                    withDockerRegistry([credentialsId: 'dockercredentials', url: '']) {
                         // Push the Docker image
                         sh "docker push ${imageName}:${imageVersion}"
                     }
