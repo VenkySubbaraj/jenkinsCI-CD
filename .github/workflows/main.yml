@@ -37,10 +37,6 @@ on:
     branches:
       - master
       
-      
-env:
-  AWS_REGION : "us-east-1"
-      
 permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
@@ -56,6 +52,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::837140532212:role/OIDC-providers # Replace with the ARN of the IAM role you created
+          role-session-name: samplerolesession
+          aws-region: us-east-1
 
       - name: Restore DynamoDB table
         run: |
