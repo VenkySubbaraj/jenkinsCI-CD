@@ -28,3 +28,27 @@
 #       - name:  Copy index.html to s3
 #         run: |
 #           aws s3 cp ./server.js s3://${{ env.BUCKET_NAME }}/
+
+
+
+name: Restore DynamoDB Table
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  restore-dynamodb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::837140532212:role/OIDC-providers # Replace with the ARN of the IAM role you created
+
+      - name: Restore DynamoDB table
+        run: |
+          aws s3 cp s3://oidc-role-test/ .
