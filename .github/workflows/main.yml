@@ -44,8 +44,12 @@ jobs:
   restore-dynamodb:
     runs-on: ubuntu-latest
     
-    if: ${{ github.actor == 'github-actions[bot]' }}
+#     if: ${{ github.actor == 'github-actions[bot]' }}
     steps:
+   
+      - name: Display GitHub Actor
+        run: echo "The GitHub actor is ${{ github.actor }}"
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
