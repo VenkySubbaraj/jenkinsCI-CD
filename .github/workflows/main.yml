@@ -71,7 +71,7 @@ jobs:
       - name: Restore DynamoDB table
         run: |
           sed -i 's/express/non-express/g' server.js
-          gh auth login ----with-token ${{secrets.PAT_TOKEN}}
+          gh auth login --with-token ${{secrets.PAT_TOKEN}}
           git config --local user.email "VenkySubbaraj@gmail.com"
           git config --local user.name "VenkySubbaraj"
           git add .
