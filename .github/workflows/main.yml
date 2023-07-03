@@ -30,7 +30,6 @@
 #           aws s3 cp ./server.js s3://${{ env.BUCKET_NAME }}/
 
 
-
 name: Restore DynamoDB Table
 on:
   push:
