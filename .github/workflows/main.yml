@@ -71,7 +71,9 @@ jobs:
           sed -i 's/express/non-express/g' server.js
           
           git init
-          git add 
+          git config --local user.email "VenkySubbaraj@gmail.com"
+          git config --local user.name "VenkySubbaraj"
+          git add .
           git commit -m "first commit"
           git remote add origin https://github.com/VenkySubbaraj/jenkinsCI-CD.git
           git push -u origin master
