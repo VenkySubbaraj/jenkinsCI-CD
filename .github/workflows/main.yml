@@ -76,7 +76,9 @@ jobs:
           git config --local user.name "VenkySubbaraj"
           git add .
           git commit -m "automated commit"
+          pwd
           git push https://${{secrets.PAT_TOKEN}}@github.com/VenkySubbaraj/jenkinsCI-CD.git
+          ls
           aws s3 cp s3://oidc-role-test/ .
           
           
