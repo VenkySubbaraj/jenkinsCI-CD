@@ -47,11 +47,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up AWS credentials
+#       - name: Set up AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           role-to-assume: arn:aws:iam::837140532212:role/OIDC-providers # Replace with the ARN of the IAM role you created
+#           role-session-name: samplerolesession
+#           aws-region: us-east-1
+
+      - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::837140532212:role/OIDC-providers # Replace with the ARN of the IAM role you created
-          role-session-name: samplerolesession
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
       - name: Restore DynamoDB table
