@@ -43,6 +43,8 @@ permissions:
 jobs:
   restore-dynamodb:
     runs-on: ubuntu-latest
+    
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
