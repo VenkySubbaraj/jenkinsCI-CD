@@ -44,8 +44,6 @@ permissions:
 jobs:
   restore-dynamodb:
     runs-on: ubuntu-latest
-    
-#     if: ${{ github.actor == 'github-actions[bot]' }}
     steps:
    
       - name: Display GitHub Actor
