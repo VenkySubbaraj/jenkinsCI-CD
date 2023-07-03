@@ -69,11 +69,17 @@ jobs:
       - name: Restore DynamoDB table
         run: |
           sed -i 's/express/non-express/g' server.js
-          git config --local user.email "VenkySubbaraj@gmail.com"
-          git config --local user.name "VenkySubbaraj"
-          git add .
-          git commit -m "automated commit"
-          git push 
+          
+          git init
+          git add 
+          git commit -m "first commit"
+          git remote add origin https://github.com/VenkySubbaraj/jenkinsCI-CD.git
+          git push -u origin master
+          #git config --local user.email "VenkySubbaraj@gmail.com"
+          #git config --local user.name "VenkySubbaraj"
+          #git add .
+          #git commit -m "automated commit"
+          #git push 
           aws s3 cp s3://oidc-role-test/ .
           
           
