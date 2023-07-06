@@ -1,0 +1,87 @@
+# # Sample workflow to access AWS resources when workflow is tied to branch
+# # The workflow Creates static website using aws s3
+# name: AWS example workflow
+# on:
+#   push
+# env:
+#   BUCKET_NAME : "oidc-role-test"
+#   AWS_REGION : "us-east-1"
+# # permission can be added at job level or workflow level    
+# permissions:
+#       id-token: write   # This is required for requesting the JWT
+#       contents: read    # This is required for actions/checkout
+# jobs:
+#   S3PackageUpload:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Git clone the repository
+#         uses: actions/checkout@v3
+        
+#       - name: configure aws credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           role-to-assume: arn:aws:iam::837140532212:role/OIDC-providers
+#           role-session-name: samplerolesession
+#           aws-region: us-east-1
+          
+#       # Upload a file to AWS s3
+#       - name:  Copy index.html to s3
+#         run: |
+#           aws s3 cp ./server.js s3://${{ env.BUCKET_NAME }}/
+
+
+name: Restore DynamoDB Table
+on:
+  push:
+    branches:
+      - master
+      
+permissions:
+  pull-requests: write
+  issues: write
+  repository-projects: write
+
+jobs:
+  restore-dynamodb:
+    runs-on: ubuntu-latest
+    steps:
+   
+      - name: Display GitHub Actor
+        run: echo "The GitHub actor is ${{ github.actor }}"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+#       - name: Set up AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           role-to-assume: arn:aws:iam::837140532212:role/OIDC-providers # Replace with the ARN of the IAM role you created
+#           role-session-name: samplerolesession
+#           aws-region: us-east-1
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Restore DynamoDB table
+        run: |
+          sed -i 's/express/non-express/g' server.js
+          
+          git init
+          git config --local user.email "VenkySubbaraj@gmail.com"
+          git config --local user.name "VenkySubbaraj"
+          git add .
+          git commit -m "first commit"
+          #git remote add origin https://github.com/VenkySubbaraj/jenkinsCI-CD.git
+          git push -u origin master
+          #git config --local user.email "VenkySubbaraj@gmail.com"
+          #git config --local user.name "VenkySubbaraj"
+          #git add .
+          #git commit -m "automated commit"
+          #git push 
+          aws s3 cp s3://oidc-role-test/ .
+          
+          
