@@ -18,3 +18,12 @@ COPY . .
 
 EXPOSE 8080
 CMD [ "node", "server.js" ]
+
+asdsda
+asdsdaasda
+sdas
+dasdasdas
+asdsdasdsad
+sdfsdfdsfsdfs
+dasdasdasasd
+as
