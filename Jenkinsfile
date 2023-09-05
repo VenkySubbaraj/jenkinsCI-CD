@@ -26,6 +26,7 @@ pipeline {
                         sh "docker build -t ${imageName}:${imageVersion} ."
                         sleep 600
                         sh 'docker push ${imageName}:${imageVersion}'
+                        sh ls
                         
                     }
                 }
