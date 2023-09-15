@@ -67,6 +67,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Restore DynamoDB table
+        id: error-code
         run: |
           sed -i 's/express/non-express/g' server.js
           
@@ -83,5 +84,11 @@ jobs:
           #git commit -m "automated commit"
           #git push 
           aws s3 cp s3://oidc-role-test/ .
+        continue-on-error: true
+
+      - name: extraction
+        run: |
+          echo "message= ${{ steps.error-code.outcome}} "
+          echo $message
           
           
